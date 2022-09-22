@@ -1,4 +1,4 @@
-The code in this repository should be used for the 2022 Calgames Contest for FRC 840.
+FRC 840 code for Calgames 2022
 
 Currently it has practice code, deployed on the practice chassis
 
@@ -7,3 +7,4 @@ Authors:
 - Satvik Reddy
 
 Feel free to ask us for an explanation of this code!
+
