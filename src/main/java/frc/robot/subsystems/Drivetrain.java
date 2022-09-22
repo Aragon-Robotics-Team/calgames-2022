@@ -7,7 +7,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -32,12 +31,10 @@ public class Drivetrain extends SubsystemBase {
 
   //via encapsulation
   private DifferentialDrive m_differentialDrive = new DifferentialDrive(leftTalon, rightTalon);
-  private Joystick driveJoystick;
+ 
 
   /** Creates a new ExampleSubsystem. */
-  public Drivetrain(Joystick joystick) {
-    driveJoystick = joystick;
-
+  public Drivetrain() {
 
     leftVictor.follow(leftTalon);
     rightVictor.follow(rightTalon);
@@ -65,7 +62,10 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // add drive stuff
-    m_differentialDrive.arcadeDrive(-driveJoystick.getY(), driveJoystick.getX());
+    // m_differentialDrive.arcadeDrive(-driveJoystick.getY(), driveJoystick.getX());
+    // ArcadeDrive(getDiffDrive());
+
+    // ref this command from robotcontainer setdefaultcommand
   }
 
   @Override
