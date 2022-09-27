@@ -4,56 +4,52 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Drivetrain extends SubsystemBase {
-  /*
-  todo: get the json files or whatveer associated with the motors
-  */
 
-  // talon srx, victor spx, victor spx, talon srx
-  public static final int leftUpperMotorID = 3;
-  public static final int leftLowerMotorID = 7;
-  public static final int rightLowerMotorID = 8;
-  public static final int rightUpperMotorId = 6;
+  // TODO: update these
+  public static final int leftPrimaryMotorID = 3;
+  public static final int leftSecondaryMotorID = 7;
+  public static final int rightPrimaryMotorID = 8;
+  public static final int rightSecondaryMotorID = 6;
   
+
+
   // change to wpi_talon to avoid inheritance problems 
   // may need to add final stuff
-  private WPI_TalonSRX leftTalon = new WPI_TalonSRX(leftUpperMotorID);
-  private WPI_TalonSRX rightTalon = new WPI_TalonSRX(rightUpperMotorId);
-  private VictorSPX leftVictor = new VictorSPX(leftLowerMotorID);
-  private VictorSPX rightVictor = new VictorSPX(rightLowerMotorID);
+  private WPI_TalonFX leftPrimaryTalon = new WPI_TalonFX(leftPrimaryMotorID);
+  private WPI_TalonFX rightPrimaryTalon = new WPI_TalonFX(rightPrimaryMotorID);
+  private WPI_TalonFX leftSecondaryTalon = new WPI_TalonFX(leftSecondaryMotorID);
+  private WPI_TalonFX rightSecondaryTalon = new WPI_TalonFX(rightSecondaryMotorID);
 
   //via encapsulation
-  private DifferentialDrive m_differentialDrive = new DifferentialDrive(leftTalon, rightTalon);
+  private DifferentialDrive m_differentialDrive = new DifferentialDrive(leftPrimaryTalon, rightPrimaryTalon);
  
 
   /** Creates a new ExampleSubsystem. */
   public Drivetrain() {
 
-    leftVictor.follow(leftTalon);
-    rightVictor.follow(rightTalon);
+    leftSecondaryTalon.follow(leftPrimaryTalon);
+    rightSecondaryTalon.follow(rightPrimaryTalon);
 
     // must invert all 4 motors 
     // why invert? https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html?#axis-conventions - look here
     // simply, ccw rotations are positive, and ccw goes backwards
-    leftTalon.setInverted(true);
-    rightTalon.setInverted(true);
+    rightSecondaryTalon.setInverted(true);
+    rightPrimaryTalon.setInverted(true);
     /*
     leftVictor.setInverted(true);
     rightVictor.setInverted(true);
     */
 
 
-    // test call to method
   }
 
-  // not sure why i need this but joystick stuff calls for it por something
+  // encapsulation of diff drive 
   public DifferentialDrive getDiffDrive() {
     return m_differentialDrive;
   }
@@ -61,11 +57,8 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // add drive stuff
-    // m_differentialDrive.arcadeDrive(-driveJoystick.getY(), driveJoystick.getX());
-    // ArcadeDrive(getDiffDrive());
 
-    // ref this command from robotcontainer setdefaultcommand
+    // ref arcade drive command from robotcontainer setdefaultcommand
   }
 
   @Override
