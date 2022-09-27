@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
 
   // TODO: update these
-  public static final int leftPrimaryMotorID = 3;
-  public static final int leftSecondaryMotorID = 7;
-  public static final int rightPrimaryMotorID = 8;
-  public static final int rightSecondaryMotorID = 6;
+  public static final int leftPrimaryMotorID = 0;
+  public static final int leftSecondaryMotorID = 0;
+  public static final int rightPrimaryMotorID = 0;
+  public static final int rightSecondaryMotorID = 0;
   
 
 
