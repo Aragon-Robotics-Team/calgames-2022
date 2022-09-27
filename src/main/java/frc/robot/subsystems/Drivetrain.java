@@ -57,7 +57,6 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
     // ref arcade drive command from robotcontainer setdefaultcommand
   }
 
