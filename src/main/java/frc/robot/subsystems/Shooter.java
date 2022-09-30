@@ -5,22 +5,19 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxLimitSwitch.Type;
+import edu.wpi.first.wpilibj.Servo;
 
 public class Shooter extends SubsystemBase {
   /*
-  to make:
-  in 3 new commands:
-  - make a command to move the motor until its at the highest point
-  - do the same ^ but lowest
+  todo:
   - release/switch th
   */
 
-  // make all the functions here "API"
+  // make all the functions here -- "API"
 
 
   public static final double kRunningSpeed = 0.75;
@@ -50,7 +47,22 @@ public class Shooter extends SubsystemBase {
   public void setMotorSpeed(double speed){
     m_motor.set(speed);
   }
+
+  public Servo getServo() {
+    return m_servo;
+  }
   // probably a second func is needed here
 
+
+
+
+  // the remains of the last shooter file
+  public void switchUp() {
+    m_servo.set(1.0);
+  }
+
+  public void resetServo() {
+    m_servo.set(0.0);
+  }
 
 }

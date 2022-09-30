@@ -12,6 +12,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.commands.shooterCommands.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -23,7 +24,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   private static final class Button {
     // actually get the correct button
-    private static final int testButton = 0; 
+    // we'll see if this naming system flies with Satvik
+    private static final int xKey = 1;
+    private static final int aKey = 2; 
+    private static final int ltKey = 7;
+    private static final int rtKey = 8;
   }
 
 
@@ -32,8 +37,13 @@ public class RobotContainer {
 
   public Joystick m_joystick = new Joystick(joystickPort);
 
-  // rename this button later
-  private JoystickButton m_TestButton = new JoystickButton(m_joystick, Button.testButton);
+  // button x
+  private JoystickButton m_UpButton = new JoystickButton(m_joystick, Button.xKey);
+  // button a
+  private JoystickButton m_DownButton = new JoystickButton(m_joystick, Button.aKey);
+
+  private JoystickButton m_ShootButton = new JoystickButton(m_joystick, Button.ltKey);
+
 
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
@@ -66,7 +76,10 @@ public class RobotContainer {
     // make a button then call a command when pressed
 
     // figure out how to make the button call thing work >:(
-    m_TestButton.whenPressed(new MoveUp(m_shooter));
+    m_UpButton.whenPressed(new MoveUp(m_shooter));
+    m_DownButton.whenPressed(new MoveDown(m_shooter));
+    m_ShootButton.whenPressed(new InstantCommand(m_shooter::switchUp, m_shooter));
+    // new InstantCommand(m_hatchSubsystem::grabHatch, m_hatchSubsystem)
   }
 
   /**

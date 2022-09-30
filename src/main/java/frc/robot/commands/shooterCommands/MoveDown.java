@@ -7,11 +7,11 @@ package frc.robot.commands.shooterCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class MoveUp extends CommandBase {
+public class MoveDown extends CommandBase {
   /** Creates a new MoveUp. */
   private Shooter m_shooter;
 
-  public MoveUp(Shooter shooter) {
+  public MoveDown(Shooter shooter) {
     m_shooter = shooter;
     // Use addRequirrements() here to declare subsystem dependencies.
 
@@ -19,17 +19,15 @@ public class MoveUp extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_shooter.resetServo();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // this part acts as a periodic()
 
-    // move it up
-    m_shooter.setMotorSpeed(Shooter.kRunningSpeed);
+    // move it down
+    m_shooter.setMotorSpeed(-Shooter.kRunningSpeed);
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +38,6 @@ public class MoveUp extends CommandBase {
   @Override
   public boolean isFinished() {
     // figure out how to call this function in this command
-    return m_shooter.getUpperLimit();
+    return m_shooter.getLowerLimit();
   }
 }
