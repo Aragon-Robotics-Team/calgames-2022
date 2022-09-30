@@ -4,12 +4,13 @@
 
 // joystick place
 package frc.robot;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
+import frc.robot.commands.shooterCommands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -31,11 +32,12 @@ public class RobotContainer {
 
   public Joystick m_joystick = new Joystick(joystickPort);
 
-  // use this for something later
+  // rename this button later
   private JoystickButton m_TestButton = new JoystickButton(m_joystick, Button.testButton);
 
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
+  private final Shooter m_shooter = new Shooter();
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -48,6 +50,8 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(new ArcadeDrive(m_drivetrain, m_joystick));
     // if the robot isnt doing anything:
     //     arcadeDrive(); 
+
+    
   }
 
   /**
@@ -60,7 +64,9 @@ public class RobotContainer {
   
   private void configureButtonBindings() {
     // make a button then call a command when pressed
-    // <button>.whenpressed(<command>)
+
+    // figure out how to make the button call thing work >:(
+    m_TestButton.whenPressed(new MoveUp(m_shooter));
   }
 
   /**
