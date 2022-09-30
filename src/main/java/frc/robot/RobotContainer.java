@@ -23,8 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   private static final class Button {
-    // actually get the correct button
-    // we'll see if this naming system flies with Satvik
+    // https://docs.google.com/document/d/1G62mE6TaUCwtP5W5R6ZvuGevoCZy0uBYiln8uxdhNSA/edit -- button bindings
     private static final int xKey = 1;
     private static final int aKey = 2; 
     private static final int ltKey = 7;
@@ -39,9 +38,7 @@ public class RobotContainer {
 
   // button x
   private JoystickButton m_UpButton = new JoystickButton(m_joystick, Button.xKey);
-  // button a
   private JoystickButton m_DownButton = new JoystickButton(m_joystick, Button.aKey);
-
   private JoystickButton m_ShootButton = new JoystickButton(m_joystick, Button.ltKey);
 
 
@@ -53,15 +50,12 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings  
-
-    // do stuff with the drivetrain
     configureButtonBindings();
+
 
     m_drivetrain.setDefaultCommand(new ArcadeDrive(m_drivetrain, m_joystick));
     // if the robot isnt doing anything:
     //     arcadeDrive(); 
-
-    
   }
 
   /**
@@ -79,7 +73,7 @@ public class RobotContainer {
     m_UpButton.whenPressed(new MoveUp(m_shooter));
     m_DownButton.whenPressed(new MoveDown(m_shooter));
     m_ShootButton.whenPressed(new InstantCommand(m_shooter::switchUp, m_shooter));
-    // new InstantCommand(m_hatchSubsystem::grabHatch, m_hatchSubsystem)
+    // a reset here isn't needed --> when moveup is called next it will automatically reset itself (look at moveup init code)
   }
 
   /**
@@ -89,6 +83,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+
+    // none yet
     return null;
   }
 

@@ -20,6 +20,7 @@ public class MoveUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // this basically moves the servo back to the "down" position
     m_shooter.resetServo();
   }
 

@@ -51,12 +51,11 @@ public class Shooter extends SubsystemBase {
   public Servo getServo() {
     return m_servo;
   }
-  // probably a second func is needed here
 
 
 
 
-  // the remains of the last shooter file
+  // the remains of the last shooter file -- used for launching
   public void switchUp() {
     m_servo.set(1.0);
   }
