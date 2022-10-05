@@ -2,35 +2,31 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.shooterCommands;
+package frc.robot.commands.climbCommands;
 
+import frc.robot.subsystems.Climb;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
 
-public class MoveUp extends CommandBase {
-  /** Creates a new MoveUp. */
-  private Shooter m_shooter;
+// this file and the other one is replaced by an instant command
+public class ClimbUp extends CommandBase {
+  /** Creates a new ClimbUp. */
+  private Climb m_climb;
 
-  public MoveUp(Shooter shooter) {
-    m_shooter = shooter;
-    // Use addRequirrements() here to declare subsystem dependencies.
-
+  public ClimbUp(Climb climb) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_climb = climb;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.resetServo();
+    m_climb.setState(true);
+    // sets solenoid to true or makes the climb goes up
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    // this part acts as a periodic()
-
-    // move it up
-    m_shooter.setMotorSpeed(Shooter.kRunningSpeed);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -39,7 +35,6 @@ public class MoveUp extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // figure out how to call this function in this command
-    return m_shooter.getUpperLimit();
+    return true;
   }
 }

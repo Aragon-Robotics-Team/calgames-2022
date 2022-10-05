@@ -7,12 +7,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.Climb;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.climbCommands.*;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.commands.shooterCommands.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -23,11 +26,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public class RobotContainer {
   private static final class Button {
-    // https://docs.google.com/document/d/1G62mE6TaUCwtP5W5R6ZvuGevoCZy0uBYiln8uxdhNSA/edit -- button bindings
+    // actually get the correct button
+    // we'll see if this naming system flies with Satvik
     private static final int xKey = 1;
-    private static final int aKey = 2; 
+    private static final int aKey = 2;
+    private static final int bKey = 3;
+    private static final int yKey = 4;
     private static final int ltKey = 7;
     private static final int rtKey = 8;
+    
   }
 
 
@@ -38,24 +45,33 @@ public class RobotContainer {
 
   // button x
   private JoystickButton m_UpButton = new JoystickButton(m_joystick, Button.xKey);
+  // button a
   private JoystickButton m_DownButton = new JoystickButton(m_joystick, Button.aKey);
+
   private JoystickButton m_ShootButton = new JoystickButton(m_joystick, Button.ltKey);
+
+  private JoystickButton m_ClimbUpButton = new JoystickButton(m_joystick, Button.bKey);
+  private JoystickButton m_ClimbDownButton = new JoystickButton(m_joystick, Button.yKey);
 
 
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final Shooter m_shooter = new Shooter();
+  private final Climb m_climb = new Climb();
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings  
-    configureButtonBindings();
 
+    // do stuff with the drivetrain
+    configureButtonBindings();
 
     m_drivetrain.setDefaultCommand(new ArcadeDrive(m_drivetrain, m_joystick));
     // if the robot isnt doing anything:
     //     arcadeDrive(); 
+
+    
   }
 
   /**
@@ -73,7 +89,14 @@ public class RobotContainer {
     m_UpButton.whenPressed(new MoveUp(m_shooter));
     m_DownButton.whenPressed(new MoveDown(m_shooter));
     m_ShootButton.whenPressed(new InstantCommand(m_shooter::switchUp, m_shooter));
-    // a reset here isn't needed --> when moveup is called next it will automatically reset itself (look at moveup init code)
+    // what this does is when the button pressed it makes a new command based on the switch up thing
+
+
+    // new InstantCommand(m_hatchSubsystem::grabHatch, m_hatchSubsystem)
+    m_ClimbUpButton.whenPressed(new InstantCommand(m_climb::setUp, m_climb));
+    m_ClimbDownButton.whenPressed(new InstantCommand(m_climb::setDown, m_climb));
+
+    
   }
 
   /**
@@ -83,8 +106,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-
-    // none yet
     return null;
   }
 

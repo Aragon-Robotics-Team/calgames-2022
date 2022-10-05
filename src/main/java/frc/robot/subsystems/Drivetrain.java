@@ -17,8 +17,6 @@ public class Drivetrain extends SubsystemBase {
   public static final int rightSecondaryMotorID = 1;
 
   
-
-
   // change to wpi_talon to avoid inheritance problems 
   // may need to add final stuff
   private WPI_TalonFX leftPrimaryTalon = new WPI_TalonFX(leftPrimaryMotorID);
@@ -65,3 +63,10 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 }
+
+
+/*
+for intake:
+- hopper using a talonsrx port 10
+- getting the ball using a cansparkmax
+*/
