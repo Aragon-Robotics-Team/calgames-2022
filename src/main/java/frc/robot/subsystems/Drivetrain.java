@@ -65,8 +65,3 @@ public class Drivetrain extends SubsystemBase {
 }
 
 
-/*
-for intake:
-- hopper using a talonsrx port 10
-- getting the ball using a cansparkmax
-*/
