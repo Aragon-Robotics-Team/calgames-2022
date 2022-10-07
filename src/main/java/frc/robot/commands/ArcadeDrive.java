@@ -9,6 +9,13 @@ public class ArcadeDrive extends CommandBase {
     private Drivetrain drivetrain;
     private Joystick driveJoystick;
 
+    public static final class Speed {
+        // used so the robot doesn't move as fast
+        public static final double turnSpeed = 0.8;
+        public static final double moveSpeed = 0.8;
+
+    }
+
     
     public ArcadeDrive(Drivetrain m_drivetrain, Joystick joystick) {
         // use getDiffDrive() to get the differential
@@ -24,12 +31,14 @@ public class ArcadeDrive extends CommandBase {
     @Override
     public void execute() {
         // this is the arcade drive part
-        drivetrain.getDiffDrive().arcadeDrive(-driveJoystick.getY(), driveJoystick.getX());
+        drivetrain.getDiffDrive().arcadeDrive(-driveJoystick.getY()*Speed.moveSpeed, driveJoystick.getX()*Speed.turnSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        
+        // this should never happen
+        // but if....
+        drivetrain.getDiffDrive().arcadeDrive(0.0, 0.0);
     }
 
     @Override
@@ -38,7 +47,3 @@ public class ArcadeDrive extends CommandBase {
     }
 }
 
-
-// todo
-
-// make arcade drive in here

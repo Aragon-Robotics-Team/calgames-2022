@@ -10,15 +10,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class Drivetrain extends SubsystemBase {
+  // motor ports
+  public static final int leftPrimaryMotorID = 4;
+  public static final int leftSecondaryMotorID = 3;
+  public static final int rightPrimaryMotorID = 2;
+  public static final int rightSecondaryMotorID = 1;
 
-  // TODO: update these
-  public static final int leftPrimaryMotorID = 0;
-  public static final int leftSecondaryMotorID = 0;
-  public static final int rightPrimaryMotorID = 0;
-  public static final int rightSecondaryMotorID = 0;
   
-
-
   // change to wpi_talon to avoid inheritance problems 
   // may need to add final stuff
   private WPI_TalonFX leftPrimaryTalon = new WPI_TalonFX(leftPrimaryMotorID);
@@ -65,3 +63,5 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 }
+
+
